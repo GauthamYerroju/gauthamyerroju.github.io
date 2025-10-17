@@ -1,7 +1,7 @@
 ---
 date: '2019-11-11 23:54 -0800'
 last_modified_at: '2019-11-11 23:54 -0800'
-published: false
+published: true
 title: Sweet 16 Macro Pad Build
 ---
 This is a build log of the Sweet 16 macro pad by [1upkeyboards.com](https://www.1upkeyboards.com/).
@@ -24,9 +24,7 @@ The kit comes with the following parts:
 * 16 Key switches of choice (I ordered Gateron Blues for the clickety clack)
 * 16 Key caps (transparent, Cherry profile)
 * 4 stand offs and screws to elevate the PCB
-* A 1upkeyboards sticker (which looks oretty nice)
-
-TODO: Add pics of box and components
+* A 1upkeyboards sticker (which looks pretty nice)
 
 ## Build
 

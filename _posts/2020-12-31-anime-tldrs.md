@@ -1,6 +1,6 @@
 ---
 date: '2020-12-31 06:54 -0800'
-last_modified_at: '2020-12-31 06:54 -0800'
+last_modified_at: '2025-10-16 21:13 -0800'
 published: true
 title: Anime TLDRs
 tags:
@@ -39,7 +39,7 @@ TLDR: Fucking masterpiece. Intelligent _and_ dramatic (rare!), excellent animati
 
 ### Psycho-Pass
 
-TLDR: Really good. Very intelligent, rarely dramatic but well-done (subtle), passable soundtrack, good word-building. Per-episode pacing is great (starts off as self-contained episodes but evolves into a continuous plot), but overall pacing is too fast for the word-building to really sink in, which is a shame because it's actually very good.
+TLDR: Really good. Very intelligent, rarely dramatic but well-done (subtle), passable soundtrack, good world-building. Per-episode pacing is great (starts off as self-contained episodes but evolves into a continuous plot), but overall pacing is too fast for the world-building to really sink in, which is a shame because it's actually very good.
 
 I'll fill these out more in the future and tweak the assessment criteria as I go along. I can probably use many of the same criteria for story-rich games too.
 
