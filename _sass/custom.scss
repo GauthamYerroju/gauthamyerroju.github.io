@@ -250,7 +250,7 @@ $ticker-duration: 1.5s;
 	margin-top: 0.5em;
 	animation-name: easeup;
 	animation-duration: $ticker-duration;
-	animation-delay: $ticker-delay;
+	// animation-delay: $ticker-delay;
 	animation-fill-mode: both;
 }
 
@@ -270,5 +270,5 @@ $ticker-duration: 1.5s;
 	&:focus {
 		color: darken($text-color, 5%);
 	}
-	transition: all 0.25s ease;
+	transition: all 0.125s ease;
 }
