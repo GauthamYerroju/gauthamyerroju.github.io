@@ -1,7 +1,7 @@
 ---
 date: '2020-12-31 06:54 -0800'
 last_modified_at: '2025-10-16 21:13 -0800'
-published: true
+published: false
 title: Anime TLDRs
 tags:
   - Anime Review
