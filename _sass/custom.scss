@@ -15,11 +15,11 @@ body
     padding: 0 16px;
 }
 
-#post-page, .post {
-	p, ul, ol {
-		font-family: "Merriweather", serif;
-	}
-}
+// #post-page, .post {
+// 	p, ul, ol {
+// 		font-family: "Merriweather", serif;
+// 	}
+// }
 
 footer {
 	font-size: 12px;
@@ -125,8 +125,8 @@ p {
 // Landing page stuff
 $hero-font-size: 2.4em;
 
-$title-duration: 0.6s;
-$title-delay: 0.6s;
+$title-duration: 0.5s;
+$title-delay: 0.5s;
 
 $ticker-height: 0.5;
 $ticker-count: 6;
