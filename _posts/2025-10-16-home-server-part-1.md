@@ -6,17 +6,17 @@ title: Building a Home Server (Part 1)
 tags: nas, server, home_server, home_lab
 ---
 
-This project has been a long time coming. My first dedicated NAS (Network Attached Storage) was built when the original Raspberry Pi was released. I plugged in an external hard drive and accessed the files over a network. The prospect of centralizing the bulk of my storage to a NAS meant I would no longer be bound to my desktop computer and would be able to use phones, tablets, and TV as clients. I've been wanting to build a "proper" NAS ever since.
+This project has been a long time coming. I built my first NAS with the original Raspberry Pi. I plugged in an external drive and accessed the files from the local network. Centralizing the bulk of my storage meant I could use phones, tablets, and the TV to access media and documents, not just my desktop. I’ve wanted a “proper” NAS ever since.
 
 > Before going further, I want to disclose the extent of my use of LLMs to write this post. I used ChatGPT to get short summaries of server OSes and generate tables. Everything else is good ol' me.
 
 ## First real NAS
 
-Over the years, I've been keeping an eye on r/homelab and r/datahoarders and gone down the rabbit hole. I finally decided to build a NAS in 2022. I bought a used Dell Optiplex SFF PC for cheap and installed some hard drives I already had.
+Over the years, I've been keeping an eye on r/homelab and r/datahoarders and gone down the rabbit hole. Eventually, in 2022, I bought a used HP Prodesk 600 G1 small form factor PC for cheap and installed some hard drives I already had.
 
-![sffpc](/img/post-images/2025-10-16-building-a-home-server-part-1/sffpc.jpg)
+![Small form factor pc](/img/post-images/2025-10-16-building-a-home-server-part-1/sffpc.jpg)
 
-> Side note: these used office PCs, a few generations older, are awesome price-to-performance hardware for setting up a normal workstation for regular computer tasks, and a ton of projects. I especially love the tiny form factor PCs from the big # companies (Dell, HP, Lenovo). Check out this great write-up (video version also available there) by [ServeTheHome](https://www.servethehome.com/introducing-project-tinyminimicro-home-lab-revolution/)
+> Side note: these used office PCs, a few generations older, are awesome price-to-performance hardware for regular computer tasks, app servers, and a ton of other projects. I especially love the tiny form factor PCs from the big 3 companies (Dell, HP, Lenovo). Check out this great write-up (video version also available there) by [ServeTheHome](https://www.servethehome.com/introducing-project-tinyminimicro-home-lab-revolution/)
 
 For the operating system, I narrowed down a few options: OMV (Open Media Vault), Unraid and ZFS seem to be the popular choices, in increasing order of complexity. Here's a summary from ChatGPT:
 
@@ -34,19 +34,21 @@ __OMV (OpenMediaVault)__: Debian-based NAS management system providing tradition
 
 I was inclined to use Unraid because it is made for JBOD (Just a Bunch Of Disks), has built-in redundancy, and looks good. Unfortunately, blocking updates after 1 year behind a paywall was a dealbreaker for me. I don't begrudge them for monetizing the project, but it was just not for me. It felt like another perpetual external dependency.
 
-ZFS is another popular choice, but it has a very rigid disk setup (so it doesn't work well with JBOD) and requires a substantial up-front investment in storage and RAM.
+I was inclined to use Unraid for its JBOD (Just a Bunch Of Disks) support and built-in redundancy, but the one-year paywall was a dealbreaker. I respect their monetization, but it added an unwanted dependency.
 
-That left Open Media Vault, so I installed it and exposed the storage to the local network through SMB. Having access to my collection of family photos, media, projects, etc, on a home network was very convenient.
+ZFS is another popular choice, but it has rigid disk setup rules (so no JBOD) and requires a substantial up-front investment in storage and RAM. But the real dealbreaker was that I couldn't pull a drive and access its data elsewhere once it's in a ZFS pool. 
+
+That left Open Media Vault, so I installed it and exposed the storage to the local network using SMB. Having access to my collection of family photos, media, projects, etc, on a home network was very convenient, and I started thinking of my peripherals more as terminals than data stores.
 
 
 ## Growing needs
 
 This OMV server was doing fine as a NAS, though it had its limitations.
-- Wireless access using SMB was enough to stream media, but not 
-- The UI is functional but clunky. After making changes, I have to save them and reload the page. I think it's still the case with OMV 6 (as of writing).
-- Backup and restore of OMV config was not native; I had to install community addons.
+- SMB wireless streaming was enough to stream media, but not file transfers.
+- The UI is clunky; changes require saving and reloading.
+- Backup/restore of configs required community add-ons.
 
-This was still fine, but I wanted to level up from a NAS to a [Home Server](https://en.wikipedia.org/wiki/Home_server), so I can learn and experiment with things like Kubernetes, Spark, local LLM stacks, self-host services like Next Cloud and Immich, set up home automation, and much more. The official and community addons addressed most of these use cases, even if there isn't a pretty admin UI. Even otherwise, OMV is built on Debian, so I could've installed anything I wanted alongside. But I thought it was time to rethink this properly.
+This was still fine, but I wanted to level up from a NAS to a [Home Server](https://en.wikipedia.org/wiki/Home_server), so I can learn and experiment with Kubernetes, Spark, LLM stacks, self-hosting with Nextcloud, home automation, and more. The available add-ons addressed most of these use cases. And even if they didn't, OMV is built on Debian, so I could've installed anything I wanted alongside OMV. But it was time to rethink this properly.
 
 ## Levelling up to a Home Server
 
@@ -58,12 +60,9 @@ Let's recap my usecases so far:
 
 One thing is missing here: a good backup strategy. Ooooh boy.
 
-![facepalm](/img/post-images/2025-10-16-building-a-home-server-part-1/facepalm.gif)
+![face palm](/img/post-images/2025-10-16-building-a-home-server-part-1/facepalm.gif)
 
-I was aware of this glaring flaw all this time, but I kept ignoring it. This only caused my sense of worry to grow over time, so I wanted to fix it this time. I was going to plan my backup strategy, but first, I had to understand my data sources. I quickly realized that to actually automate backups and centralize data across all my (and my family's) devices for at least the next few years, I needed more storage than I had (around 18TB). I also wanted parity protection. Until now, I have been lucky with disk failures. Even my oldest hard drives are readable. But of course, they won't last forever.
-
-And just like that, I was convinced that I wanted to rethink the home server from scratch.
-
+I was aware of this glaring flaw all this time, but I kept ignoring it. This only caused my sense of worry to grow over time, so I wanted to fix it this time. To plan a backup strategy, I had to understand my data sources. I quickly realized that I needed a lot more storage than I had (around 18TB) to automate backups and centralize data across all my devices for at least the next few years. I also wanted parity protection, because while none of my hard drives have failed yet, they eventually will.
 
 # Home Server 2025
 
@@ -135,7 +134,7 @@ This table adds a few more details:
 
 The protection level for each category is based on a balance between importance, storage cost, and runtime performance hit.
 
-Category 1 can be rebuilt easily with deployment scripts. Excluding the actual assets (categories 3, 4 and 5), _Configs_ (category 2) is also irreplaceable, or very tedious to rebuild. I put this on a separate SSD dedicated to this purpose. I chose an SSD because this data is frequently read and updated (affecting the performance of services). However, we lose two features offered by HDDs: write endurance and power loss protection. Luckily, SSD write endurance has come a long way in the past decade, and enterprise SSDs used in servers usually have high write endurance and capacitor-based [Power Loss Protection](https://en.wikipedia.org/wiki/Solid-state_drive#Battery_and_supercapacitor) (PLP). Putting configs on a dedicated SSD also decouples the backup and recovery strategies from the other categories.
+Category 1 can be rebuilt easily with deployment scripts. Excluding the actual assets (categories 3, 4 and 5), _Configs_ (category 2) is also irreplaceable, or very tedious to rebuild. I put this on a separate SSD dedicated to this purpose. I chose an SSD because this data is frequently read and updated (affecting the performance of services). However, we lose two features offered by HDDs: write endurance and power loss protection. Luckily, enterprise SSDs used in servers usually have high write endurance and capacitor-based [Power Loss Protection](https://en.wikipedia.org/wiki/Solid-state_drive#Battery_and_supercapacitor) (PLP). Putting configs on a dedicated SSD also decouples the backup and recovery strategies from the other categories.
 
 ## 2. Hardware Selection and Acquisition
 
@@ -165,7 +164,7 @@ I was going to use one of them as parity and be done with it, when I found anoth
 
 I rushed home, plugged them in and checked the SMART stats, and I was not disappointed. The SMART attributes were excellent, and the drive had been running for 1264 days 24/7.
 
-Next, I researched the models online to get a better understanding of their strengths and weaknesses. My primary concern is to balance idle power usage with drive wear. I could spin down the drives when not in use, but frequent spin-up and spin-down cycles wear out HDDs faster, due to the electrical, thermal, and mechanical shocks. It turns out that both models have excellent resiliency and are meant to run 24x7, but their data sheets don't mention much about spin-cycling. I'll have to make a choice between keeping them idle, or spinning them down completely based on usage patterns and data organization. Keeping them spinning is a good default behaviour (at the cost of idle power consumption), but I have thought about this and have a strategy. Premature micro-optimization, I know, but I get to do this on my hobbies, so I don't do it on the job! I'll go more into it in part 2, where I'll go over the software stack and configuration.
+Next, I researched the models online to get a better understanding of their strengths and weaknesses. My primary concern is to balance idle power usage with drive wear. I could spin down the drives when not in use, but frequent spin-up and spin-down cycles wear out HDDs faster, due to the electrical, thermal, and mechanical shocks. It turns out that both models have excellent resiliency and are meant to run 24x7, but their data sheets don't mention much about spin-cycling. I'll have to make a choice between keeping them idle, or spinning them down completely based on usage patterns and data organization. Keeping them spinning is a good default behaviour (at the cost of idle power consumption), but I have thought about this and have a strategy involving mergerfs policies. Premature micro-optimization, I know, but I scratch this itch on my hobbies, so I don't do it on the job! I'll go into more detail later in a following post, where I discuss the software stack and configuration.
 
 ### Large SSD for tiered cache
 
