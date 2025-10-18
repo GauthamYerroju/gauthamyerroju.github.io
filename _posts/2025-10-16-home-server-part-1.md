@@ -174,14 +174,14 @@ I want to keep the hard disks spun down as much as possible. I was thinking of h
 
 A lot of research and luck went into the rest of the components (especially and surprisingly the PSU and case), but I'll keep it short. I tried to optimize for the lowest idle power consumption while still capable of occasional heavy workloads.
 
-__CPU: Intel i5-12400 (refurbished)__ High single-thread performance and power efficiency, QuickSync hardware video transcoding.
-__Motherboard: ASRock B660M Pro RS, MicroATX (refurbished)__ Budget-friendly, stable, supports NVMe; no ECC validation but adequate for home server reliability.
-__RAM: 32 GB DDR5 6000 CL30 (used)__. Sufficient for caching, VMs, and database workloads.
-__PSU: XPG Core Reactor II, 650 Watt (new)__ Great efficiency at typical operating wattage, [Cybenetics Platinum tier](https://www.cybenetics.com/evaluations/psus/2218/).
-__OS SSD: 256 GB SATA/NVMe (used)__ Dedicated to Proxmox + runtime.
-__Case: Fractal Design Define R5 (new)__ Modern cases don't fit 8 HDDs, old cases do, but couldn't find any for a good price.
-__NIC: Mellanox ConnectX-3 Pro CX312B (used)__ Good balance between speed and idle power efficiency, 10 Gigabit.
-__HBA: 9207-8i, 6Gbs, SAS2308, PCIe 3.0, IT Mode__ Storage expansion option with good idle power efficiency.
+* __CPU: Intel i5-12400 (refurbished)__ High single-thread performance and power efficiency, QuickSync hardware video transcoding.
+* __Motherboard: ASRock B660M Pro RS, MicroATX (refurbished)__ Budget-friendly, stable, supports NVMe; no ECC validation but adequate for home server reliability.
+* __RAM: 32 GB DDR5 6000 CL30 (used)__. Sufficient for caching, VMs, and database workloads.
+* __PSU: XPG Core Reactor II, 650 Watt (new)__ Great efficiency at typical operating wattage, [Cybenetics Platinum tier](https://www.cybenetics.com/evaluations/psus/2218/).
+* __OS SSD: 256 GB SATA/NVMe (used)__ Dedicated to Proxmox + runtime.
+* __Case: Fractal Design Define R5 (new)__ Modern cases don't fit 8 HDDs, old cases do, but couldn't find any for a good price.
+* __NIC: Mellanox ConnectX-3 Pro CX312B (used)__ Good balance between speed and idle power efficiency, 10 Gigabit.
+* __HBA: 9207-8i, 6Gbs, SAS2308, PCIe 3.0, IT Mode__ Storage expansion option with good idle power efficiency.
 
 ---
 
