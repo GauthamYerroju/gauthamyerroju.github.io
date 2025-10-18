@@ -1,9 +1,9 @@
 ---
 date: '2025-10-16 21:10 -0800'
-last_modified_at: '2025-10-16 21:10 -0800'
+last_modified_at: '2025-10-17 19:10 -0800'
 published: true
 title: Building a Home Server (Part 1)
-tags: nas, server, home server, home lab
+tags: nas, server, home_server, home_lab
 ---
 
 This project has been a long time coming. My first dedicated NAS (Network Attached Storage) was built when the original Raspberry Pi was released. I plugged in an external hard drive and accessed the files over a network. The prospect of centralizing the bulk of my storage to a NAS meant I would no longer be bound to my desktop computer, and will be able to use phones, tablets, and TV as clients. I've been wanting to build a "proper" NAS ever since.
@@ -13,27 +13,21 @@ This project has been a long time coming. My first dedicated NAS (Network Attach
 
 Over the years, I've been keeping an eye on r/homelab and r/datahoarders and gone down the rabbit-hole. I finally decided to build a NAS in 2022. I bought a used Dell Optiplex SFF PC for cheap and installed some hard drives I already had.
 
-![sffpc](/img/post-images/2025-10-16-building-a-home-server/sffpc.jpg)
+![sffpc](/img/post-images/2025-10-16-building-a-home-server-part-1/sffpc.jpg)
 
 > Side note: these used office PCs few generations older are awesome price-to-performance hardware for setting up a normal workstation PC, and a ton of projects. I especially love the tiny form factor PCs from the big # companies (Dell, HP, Lenovo). Check out this great write-up (video version also avaiable there) by [ServeTheHome](https://www.servethehome.com/introducing-project-tinyminimicro-home-lab-revolution/)
 
 For the operating system, I narrowed down a few options: OMV (Open Media Vault), Unraid and ZFS seem to be the popular choices, in increasing order of complexity.
 
-### ZFS
-Combines filesystem and volume management with checksums, snapshots, and copy-on-write to ensure data integrity and simplify storage pooling.
-
+**ZFS**: Combines filesystem and volume management with checksums, snapshots, and copy-on-write to ensure data integrity and simplify storage pooling.
 * Pros: End-to-end data integrity; snapshots & clones; pooled storage; compression & deduplication; scalable.
 * Cons: High RAM & CPU usage; complex setup; limited drive expansion flexibility; recovery can be slow; not native on Linux without extra modules.
 
-### Unraid
-Uses a single-parity disk system with independent data drives, allowing flexible drive addition, mixed sizes, and selective parity protection.
-
+**Unraid**: Uses a single-parity disk system with independent data drives, allowing flexible drive addition, mixed sizes, and selective parity protection.
 * Pros: Easy to add/remove drives; mix drive sizes; Docker/VM support; simple parity; good for media/storage pools.
 * Cons: Single parity limits redundancy; slower rebuilds; proprietary licensing; limited filesystem features; not ideal for high-write workloads.
 
-### OMV (OpenMediaVault)
-Debian-based NAS management system providing traditional filesystems (ext4, XFS, Btrfs) with software RAID, SMB/NFS sharing, and plugin-based services.
-
+**OMV (OpenMediaVault)**: Debian-based NAS management system providing traditional filesystems (ext4, XFS, Btrfs) with software RAID, SMB/NFS sharing, and plugin-based services.
 * Pros: Lightweight; Debian-based; plugin ecosystem; standard RAID support; flexible filesystem choice.
 * Cons: Less advanced data integrity (depends on filesystem); manual snapshots; GUI can be basic; scaling complex setups is harder; fewer built-in redundancy features.
 
@@ -41,17 +35,17 @@ I was inclined to use Unraid, because it is made for JBOD (Just a Bunch Of Disks
 
 ZFS seemed to be another popular choice, but it has a very rigid disk setup (so doesn't work well with JBOD), and requires a substantial up-front investment in storage and RAM.
 
-That left Open Media Vault, so I installed it and exposed the storage to th elocal network through SMB. Having acces to my collection of family photos, media, projects, etc on a home network was very convinient. However, it had its limitations:
+That left Open Media Vault, so I installed it and exposed the storage to the local network through SMB. Having acces to my collection of family photos, media, projects, etc on a home network was very convinient.
+
+
+## Growing needs
+
+This server was doing fine as a NAS, though it had its limitations.
 - Wireless access using SMB was a bit sluggish.
-- Backup and restore of OMV config was not native, had to install community addons for that.
 - The UI is functional but clunky. After making changes, I have to save them and reload the page. I think it's still the case with OMV 6 (as of writing).
+- Backup and restore of OMV config was not native, had to install community addons.
 
-Despite all this, __OMV is still my recommendation for most people__.
-
-Also, I started to have gramder plans for this server. I wanted to experiment with Docker, and OMV didn't get native Docker support until recently. I wanted to self-host services analogous to Google Drive, Google Photos, Google Docs, etc. (Next Cloud and Immich). I wanted to try and host local LLMs for learning. And much more. 
-
-But let's be real, OMV is still great for all of that. It is built on Debian, so I could've installed anything I wanted alongside, if the community plugins didn't already provide everything I needed (which they did). I could have also fixed the slow wireless speed by switching to a better router. However, I wanted to level up from a NAS to a [Home Server](https://en.wikipedia.org/wiki/Home_server), because I wanted a platform to learn and experiment with things like Docker, Kubernetes, Spark, etc. This inspired me to try another OS which was often mentioned on Reddit: Proxmox. It's a Hypervisor OS, so I can bring up and tear down VMs as sandboxes without worrying about the stability of the server. I just never had the motivation to actually do it, until recently.
-
+This was still fine, but I wanted to level up from a NAS to a [Home Server](https://en.wikipedia.org/wiki/Home_server), so I can learn and experiment with things like Kubernetes, Spark, local LLM stacks, self-host services like Next Cloud and Immich, set up home automation, and much more. The official and community addons addressed most of these use cases, even if the there isnt a pretty admin UI. Even otherwise, OMV is built on Debian, so I could've installed anything I wanted alongside. But I thought it was time to rethink this properly.
 
 ## Leveling up to a Home Server
 
@@ -63,7 +57,7 @@ Let's recap my usecases so far:
 
 One thing is missing here: a good backup strategy. Ooooh boy.
 
-![facepalm](/img/post-images/2025-building-a-home-server/facepalm.gif)
+![facepalm](/img/post-images/2025-10-16-building-a-home-server-part-1/facepalm.gif)
 
 I was aware of this glaring flaw all this time but I kept ignoring it. This only caused my sense of worry to grow over time, so I wanted to fix it this time. I was going to plan my backup strategy, but first, I had to understand my data sources. I quickly realized that to actually automate backups and centralize data across all my (and my family's) devices for at least the next few years, I needed more storage than I had (around 18TB). I also wanted parity protection. Until now, I have been lucky with disk failures. Even my oldest hard drives are readable. But of course, they won't last forever.
 
@@ -72,7 +66,7 @@ And just like that, I was convinced that I wanted to rethink the home server fro
 
 # Home Server 2025
 
-I want to start with my goals for this home server.
+As I was interested in a platform for experimentation, I decided to try Proxmox as the OS on bare metal. It's a hypervisor, so I can bring up and tear down VMs without worrying about the stability of the server. With that out of the way, let's start with my goals for this home server.
 
 ## Design Goals
 
@@ -132,15 +126,15 @@ This table adds a few more details:
 
 | Category       | Description                                                          | Criticality | Write Frequency           | Read Frequency         | Protection                          |
 |----------------|----------------------------------------------------------------------|-------------|-----------------------------|------------------------|--------------------------------------|
-| 1. Ephemeral   | OS runtime data, Docker containers, temp data                        | Low         | Frequent                    | Frequent               | No parity or backup                  |
-| 2. Configs     | Docker/Proxmox configs, app metadata, DBs for services               | High        | Frequent                    | Moderate to Frequent   | Daily parity + backup                |
-| 3. Documents   | Nextcloud docs, multi-device sync folders                            | High        | Frequent                    | Frequent               | Daily parity + backup                |
-| 4. Photos      | Camera roll backups                                                  | High        | Frequent adds, rare changes | Moderate               | Daily parity + backup                |
-| 5. Media       | TV/movies/music/games/software; some irreplaceable                   | Mixed       | Infrequent                  | Infrequent to Moderate | Parity only (rare items also backed) |
+| Ephemeral   | OS runtime, Docker containers, temp data                        | Low         | Frequent                    | Frequent               | Parity only                   |
+| Configs     | Docker/Proxmox configs, app metadata, DBs for services               | High        | Frequent                    | Moderate to Frequent   | Daily parity + backup                |
+| Documents   | Nextcloud docs, multi-device sync folders                            | High        | Frequent                    | Frequent               | Daily parity + backup                |
+| Photos      | Camera roll backups                                                  | High        | Frequent adds, rare changes | Moderate               | Daily parity + backup                |
+| Media       | TV/movies/music/games/software; some irreplaceable                   | Mixed       | Infrequent                  | Infrequent to Moderate | Parity only (rare items backed up) |
 
-The protection level for each category is based on a balance between storage size and backup importance.
+The protection level for each category is based on a balance between importance, storage cost, and runtime performance hit.
 
-Excluding the actual assets (categories 3, 4 and 5), _Configs_ (category 2) is also irreplaceable, or very labourous to rebuild. So I decided to put this on a separate SSD dedicated to this purpose. I chose an SSD, because this data is frequently read and updated (affects performance of services). However, we lose two features offered by HDDs: write endurance, and power loss protection. Luckily, SSD write endurance has come a long way in the past decade, and enterprise SSDs used in servers usually have high write endurance and capacitor-based [Power Loss Protection](https://en.wikipedia.org/wiki/Solid-state_drive#Battery_and_supercapacitor) (PLP). Putting configs on a dedicated SSD also decouples the backup and recovery strategies from the other categories.
+Category 1 can be rebuilt easily with deployment scripts. Excluding the actual assets (categories 3, 4 and 5), _Configs_ (category 2) is also irreplaceable, or very tedious to rebuild. So I decided to put this on a separate SSD dedicated to this purpose. I chose an SSD, because this data is frequently read and updated (affects performance of services). However, we lose two features offered by HDDs: write endurance, and power loss protection. Luckily, SSD write endurance has come a long way in the past decade, and enterprise SSDs used in servers usually have high write endurance and capacitor-based [Power Loss Protection](https://en.wikipedia.org/wiki/Solid-state_drive#Battery_and_supercapacitor) (PLP). Putting configs on a dedicated SSD also decouples the backup and recovery strategies from the other categories.
 
 ## 2. Hardware Selection and Acquisition
 
