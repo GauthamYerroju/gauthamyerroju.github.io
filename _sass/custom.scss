@@ -125,7 +125,7 @@ p {
 // Landing page stuff
 $hero-font-size: 2.4em;
 
-$title-delay: 0.125s;
+$title-delay: 0.25s;
 $title-duration: 0.2s;
 
 $ticker-height: 0.5;
@@ -249,7 +249,7 @@ $ticker-duration: 1.5s;
 .hero-nav {
 	margin-top: 0.5em;
 	animation-name: easeup;
-	animation-duration: $ticker-duration;
+	animation-duration: $title-duration;
 	// animation-delay: $ticker-delay;
 	animation-fill-mode: both;
 }
