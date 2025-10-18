@@ -125,8 +125,8 @@ p {
 // Landing page stuff
 $hero-font-size: 2.4em;
 
-$title-duration: 0.333s;
-$title-delay: 0.333s;
+$title-duration: 0.75s;
+$title-delay: 0.5s;
 
 $ticker-height: 0.5;
 $ticker-count: 6;
@@ -134,7 +134,7 @@ $ticker-count: 6;
 $ticker-delay: $title-duration + $title-delay + $title-duration;
 $ticker-duration: 1.5s;
 
-$entry-duration: 0.25s;
+$entry-duration: 0.5s;
 
 @keyframes ticker {
 	$ticker-step: ($ticker-count) * 2;
