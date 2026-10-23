@@ -3,7 +3,7 @@ date: '2026-10-23 20:37 +0530'
 last_modified_at: '2026-10-23 20:37 +0530'
 published: true
 title: Starting my journey to AI adoption
-tags: AI, "AI-assisted development", software engineering, AI skepticism, AI ethics, code quality, developer productivity, software architecture, AI and the future of work, career development, AI-generated content, AI safety
+tags: ai, ai_assisted_development, software_engineering, ai_skepticism, ai_ethics, code_quality, developer_productivity, software_architecture, ai_and_the_future_of_work, career_development, ai_generated_content, ai_safety
 ---
 
 > Before going further, I want to disclose the extent of my use of LLMs to write this post. In the spirit of this post, I used ChatGPT to do a mind dump, organize my thoughts, and expand them in my writing style, for which I asked ChatGPT to analyze my other blog posts. Then I edited the output to arrive at this post. I will continue to edit it until I am satisfied, and this sentence will remain until I do so.
