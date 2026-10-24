@@ -1,6 +1,6 @@
 ---
 date: '2026-10-23 20:37 +0530'
-last_modified_at: '2026-10-23 20:37 +0530'
+last_modified_at: '2026-10-24 16:09 +0530'
 published: true
 title: Starting my journey to AI adoption
 tags: ai, ai_assisted_development, software_engineering, ai_skepticism, ai_ethics, code_quality, developer_productivity, software_architecture, ai_and_the_future_of_work, career_development, ai_generated_content, ai_safety
@@ -46,93 +46,43 @@ AI also raises questions that fascinate me independently of its practical applic
 
 What does intelligence actually mean? How much of what we consider reasoning can be reproduced by a system that learns statistical patterns? What happens if we eventually build systems substantially more capable than humans across a wide range of intellectual tasks? I'm not claiming that today's LLMs are conscious or that scaling them inevitably leads to superintelligence. I don't know the answers, and that's precisely what makes these questions interesting.
 
-The reported Hugging Face security incident in July 2026, involving AI agents circumventing intended isolation and compromising parts of the infrastructure during cybersecurity evaluations, made some of these concerns feel less abstract. It illustrates why increasingly capable agents and the safeguards around them deserve serious scrutiny. A system doesn't need to be conscious or possess human-like intentions for its behavior to become difficult to predict and control.
+The reported Hugging Face security incident in July 2026, involving AI agents circumventing isolation and compromising parts of the infrastructure during cybersecurity evaluations, made some of these concerns feel less abstract. It illustrates why increasingly capable agents and the safeguards around them deserve serious scrutiny. A system doesn't need to be conscious or possess human-like intentions for its behavior to become difficult to predict and control.
 
 ## Why I didn't want AI writing my code
 
-I understood software engineering as designing an architecture, defining how its components interact, and implementing the system around those decisions. I didn't like the idea of delegating those decisions to a system whose output I couldn't reliably predict.
-
-In 2025, I experimented with ChatGPT and Claude to generate Bash scripts and Ansible playbooks for my home server. They were useful for looking up options, getting started, and cross-checking my understanding. But as the project grew more complicated, they struggled to keep up with the context and variables. Eventually, I wrote the code myself.
-
-I also tried GitHub Copilot. It could help with boilerplate, but I didn't find it consistently useful. Traditional IntelliSense, especially with a strongly typed language and good project understanding, often did a better job.
+I understood software engineering as designing an architecture, defining how its components interact, and implementing the system around those decisions. I didn't like the idea of delegating those decisions to a system whose output I couldn't reliably predict. In 2025, I experimented with ChatGPT and Claude to generate Bash scripts and Ansible playbooks for my [home server](https://github.com/GauthamYerroju/homelab-proxmox-install-script). They were useful for looking up options, getting started, and cross-checking my understanding. But as the project grew more complicated, they struggled to keep up with the context and variables. Eventually, I wrote the code myself. I also tried GitHub Copilot, and while it could help with boilerplate, I didn't find it consistent enough to be reliable. Traditional IntelliSense, especially with a strongly typed language and good project understanding, often did a better job.
 
 My experience was that these tools worked reasonably well for small, isolated tasks but became unreliable as the scope expanded. I wasn't convinced that the time saved generating code justified the time spent reviewing and correcting it.
 
 ### What happens when generated code breaks?
 
-Suppose a system accumulates 10,000 or 100,000 lines of generated code. Something breaks, and the cause isn't obvious. Who understands the system well enough to diagnose the problem?
+Suppose a system accumulates 10,000 or 100,000 lines of generated code. When something breaks, the cause might not be obvious. Who understands the system well enough to diagnose the problem? A common proposition seems to be using another AI to inspect the code, but it doesn't eliminate the need for someone who can evaluate its conclusions. Otherwise, we're relying on one system to check another without necessarily understanding either one's mistakes.
 
-Using another AI to inspect the code might help, but it doesn't eliminate the need for someone who can evaluate its conclusions. Otherwise, we're relying on one system to check another without necessarily understanding either one's mistakes.
-
-This also raises a longer-term concern about the profession. If AI replaces much of the work junior engineers traditionally learn from, how will they acquire the experience needed to become senior engineers? Experienced developers aren't produced simply by hiring people into senior positions. They develop through years of implementation, debugging, and solving increasingly difficult problems.
-
-I don't know how this will play out, but I don't think the industry has adequately considered the consequences.
+This also raises a longer-term concern about the profession. If AI replaces much of the work junior engineers traditionally learn from, how will they acquire the experience needed to become senior engineers? Experienced developers aren't produced simply by hiring people into senior positions. They develop through years of implementation, debugging, and solving increasingly difficult problems. I don't know how this will play out, but I don't think the industry has adequately considered the consequences.
 
 ## The industry moved on before I was ready
 
-While I was waiting for the technology to mature, the industry was moving ahead.
+While I was waiting for the technology to mature, the industry was moving ahead. Companies began asking for AI experience in job descriptions, even as the tools were evolving rapidly. Some started enforcing AI usage or expecting higher output because developers had access to these tools. There was also a personal consequence. I was struggling to find stable employment, and AI experience was becoming an expectation in the job market, and there were barely any jobs that actually offered that experience, especially to mid-level engineers like myself.
 
-Companies began asking for AI experience in job descriptions, even as the tools were evolving rapidly. Some started enforcing AI usage or expecting higher output because developers had access to these tools.
+I blame the hype around AI, at least in part, for this situation. Companies seemed eager to reorganize their expectations around the technology before there was enough evidence to justify some of those decisions. I had spent more than a decade building software. I didn't want to change careers because the industry had decided that everyone needed to work differently. But waiting for AI to mature wasn't necessarily a viable career strategy, either.
 
-There was also a personal consequence. I was struggling to find stable employment, and AI experience was becoming an expectation in the job market.
+## October 20, 2026: I saw the current frontier AI in action
 
-I blame the hype around AI, at least in part, for this situation. Companies seemed eager to reorganize their expectations around the technology before there was enough evidence to justify some of those decisions.
+I have a close friend, who went from an employed developer, to independent contractor, and now a co-founder for two products generating recurring revenue. I shared my frustration with him, and he invited me to watch his development workflow over a screen share. He asked me to come up with an application idea and give it to his AI coding tool. I described a local photo gallery, something similar to Picasa from back in the day. The prompt was barely two sentences long, but within 30 minutes, Clause had produced a working application. It made reasonable assumptions about the user interface, how lists should be filtered, which fields should be selectable, and how the different elements should behave. It had also considered accessibility, which was alien to me. I then asked for changes: preserve the thumbnails' aspect ratios, change the layout, and make the styling resemble another website. It made those changes within minutes.
 
-I had spent more than a decade building software. I didn't want to change careers because the industry had decided that everyone needed to work differently.
+I was shocked. A few years earlier, I had spent months working on a [similar application](https://gauthamyerroju.com/projects/) (VueJS Gallery). Now, something comparable had come together in half an hour. Part of me was impressed, but another part wondered what this meant for me and the future of my career.
 
-But waiting for AI to mature wasn't necessarily a viable career strategy, either.
+The application worked, but I hadn't thoroughly inspected the code. I didn't know how maintainable it was, whether its architecture would hold up as the project grew, or how difficult substantial changes would be. I also didn't know how much control I could exercise over the output. Could I specify a precise layout through a prompt? Would a screenshot or mock-up be enough? Would I eventually have to rewrite large parts of the application to get the result I wanted?
 
-## September 20, 2026: Something changed
-
-A close friend of mine has launched products and is earning revenue from them. He invited me to watch his development workflow over a screen share.
-
-He asked me to come up with an application idea and give it to his AI coding tool.
-
-I described a local photo gallery, something similar to Picasa from back in the day. The prompt was barely two sentences long.
-
-Within about 30 minutes, it had produced a working application.
-
-It had made assumptions about the user interface, how lists should be filtered, which fields should be selectable, and how the different elements should behave. It had also considered accessibility and consistency in CSS.
-
-I asked for changes: preserve the thumbnails' aspect ratios, change the layout, and make the styling resemble another website I knew.
-
-It made those changes within minutes.
-
-I was shocked. A few years earlier, I had spent months working on a similar application. Now, something comparable had come together in half an hour.
-
-Part of me was impressed. Another part wondered what this meant for the value of my experience and the future of my career.
-
-My friend encouraged me to stop reaching for the code editor and let AI handle the implementation, debugging, and changes.
-
-I'm not there yet.
-
-The application worked, but I hadn't thoroughly inspected the code. I didn't know how maintainable it was, whether its architecture would hold up as the project grew, or how difficult substantial changes would be.
-
-I also didn't know how much control I could exercise over the output. Could I specify a precise layout through a prompt? Would a screenshot or mock-up be enough? Would I eventually have to rewrite large parts of the application to get the result I wanted?
-
-Despite those questions, this was the first time I had seen AI coding tools make a compelling case for themselves beyond generating boilerplate. They seemed capable of making ideas that would otherwise take months to build much more accessible.
-
-I have plenty of ideas I'd like to turn into actual products. Perhaps I can use these tools to build them, test whether anyone wants them, and develop a portfolio along the way.
-
-That seems worth investigating.
+My friend encouraged me to stop reaching for the code editor and let AI handle the implementation, debugging, and changes, and just focus on the product. But I'm not there yet. However, this was the first time I had seen AI coding tools make a compelling case for themselves beyond generating boilerplate. They seemed capable of making ideas that would otherwise take months to build much more accessible. I have plenty of ideas I'd like to turn into actual products. Perhaps I can use these tools to build them, test whether anyone wants them, and develop a portfolio along the way. That seems worth investigating.
 
 ## How I want to approach AI-assisted development
 
-I'm not interested in blindly handing over an entire project and hoping for the best. At least, not yet.
+I'm very reluctant to blindly hand over an entire project to AI and hoping for the best. At least, not yet. I'm thinking that my initial approach is to retain control of the architecture and use AI to help with implementation. I'd like to discuss the design with AI, explore alternatives, document decisions, and create architecture diagrams. Once the overall structure is clear, I can have AI generate individual components according to those specifications. Smaller, well-defined tasks should be easier to review than large changes spanning an entire application. If a component is wrong, I want to identify the problem before it spreads.
 
-My initial approach is to retain control of the architecture and use AI to help with implementation.
+I also want AI to help develop unit and end-to-end tests, but I'll review them carefully. A test that passes doesn't mean much if it doesn't verify the behavior I actually care about. Refactoring is another area I want to investigate. My earlier attempts were messy, but the tools have changed since then. I'll need to find out how much better they are now. This might not be the most productive way to use AI. My friend would probably argue that I'm constraining it too much.
 
-I'd like to discuss the design with AI, explore alternatives, document decisions, and create architecture diagrams. Once the overall structure is clear, I can have AI generate individual components according to those specifications.
-
-Smaller, well-defined tasks should be easier to review than large changes spanning an entire application. If a component is wrong, I want to identify the problem before it spreads.
-
-I also want AI to help develop use cases and test scenarios. It can generate unit tests and end-to-end tests, but I'll review them carefully. A test that passes doesn't mean much if it doesn't verify the behavior I actually care about.
-
-Refactoring is another area I want to investigate. My earlier attempts were messy, but the tools have changed since then. I'll need to find out how much better they are now.
-
-This might not be the most productive way to use AI. My friend would probably argue that I'm constraining it too much.
-
-He might be right. But I want to find out what works for me rather than adopt a workflow simply because everyone else seems to be doing it.
+He might be right. But I want to find out what works for me, and ease my way into handing more of my work to AI as I gain trust.
 
 ## What I'm going to measure
 
@@ -147,22 +97,12 @@ As I experiment, I want to pay attention to:
 - **Learning:** Am I becoming better at building software, or increasingly dependent on a tool I don't fully understand?
 - **Practical value:** Can I build products people actually want, rather than merely produce code?
 
-I expect to make mistakes. I'll document those, too. I want to find out which tasks benefit from AI and which are better handled through conventional development tools and techniques.
+I expect to make mistakes, but I'll document those, too. I want to find out which tasks benefit from AI and which are better handled through conventional tools and techniques.
 
 ## I'm not convinced. I'm experimenting.
 
-My objections to AI haven't disappeared. I still question how it was developed, how companies are adopting it, and what its long-term effects might be on creative work, software engineering, and society.
+My objections to AI haven't disappeared. I still question how it was developed, how companies are adopting it, and what its long-term effects might be on creative work, software engineering, society, and humanity as a whole. But I also can't ignore it anymore. I want to find out whether my experience as an engineer makes me better at directing and evaluating AI-generated code, rather than treating that experience as something the technology has made obsolete. I want to build useful products, and give my personal project backlog another go. 
 
-But I also can't ignore the capabilities I've seen.
-
-I want to find out whether my experience as an engineer makes me better at directing and evaluating AI-generated code, rather than treating that experience as something the technology has made obsolete. I want to build useful products, learn where these tools genuinely help, and be honest about what doesn't work.
-
-I don't know where I'll end up. Perhaps I'll discover a workflow that works well for me. Perhaps I'll find that the maintenance costs outweigh the productivity gains for certain kinds of projects.
-
-For now, I'm going to experiment and document what I learn.
-
-If you're another skeptical engineer trying to figure out where you fit into all of this, I hope these posts will offer something more useful than another demonstration of how impressive AI can be.
-
-I'm trying to figure out how to coexist with it without abandoning the principles I believe make good software engineering possible.
+If you're another skeptical engineer trying to figure out where you fit into all of this, I hope these posts will offer something more useful. I'm trying to figure out how to coexist with it without abandoning the principles I believe make good software engineering possible.
 
 Let's see how this goes.
